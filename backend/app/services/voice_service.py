@@ -10,9 +10,9 @@ from app.core.config import get_settings
 
 
 def _generate_soft_chime_wav_base64() -> str:
-    """Generate a tiny valid WAV chime as fallback audio when TTS API keys are absent."""
-    sample_rate = 16000
-    duration_sec = 0.25
+    """Generate a short valid WAV tone so the browser knows TTS is in demo mode."""
+    sample_rate = 22050
+    duration_sec = 0.15
     n_samples = int(sample_rate * duration_sec)
     buf = io.BytesIO()
     with wave.open(buf, "wb") as wf:
@@ -22,7 +22,7 @@ def _generate_soft_chime_wav_base64() -> str:
         frames = bytearray()
         for i in range(n_samples):
             env = 1.0 - (i / n_samples)
-            val = int(4000 * env * math.sin(2 * math.pi * 587.33 * i / sample_rate))
+            val = int(3000 * env * math.sin(2 * math.pi * 523.25 * i / sample_rate))
             frames.extend(struct.pack("<h", val))
         wf.writeframes(bytes(frames))
     return base64.b64encode(buf.getvalue()).decode("ascii")
@@ -33,8 +33,13 @@ async def transcribe_audio(
     filename: str = "recording.webm",
     language: str = "en",
 ) -> Dict[str, Any]:
-    """Transcribe uploaded audio via OpenAI Whisper in Live mode, or Demo fallback."""
+    """
+    Transcribe uploaded audio.
+    - Live mode  : sends to OpenAI Whisper and returns the real transcript.
+    - Demo mode  : returns a helpful sample sentence so the UI can still demonstrate the flow.
+    """
     settings = get_settings()
+
     if settings.is_live_ai_available and len(audio_bytes) > 0:
         try:
             async with httpx.AsyncClient(timeout=30.0) as client:
@@ -46,31 +51,34 @@ async def transcribe_audio(
                 )
                 resp.raise_for_status()
                 text = resp.json().get("text", "").strip()
-                return {
-                    "text": text,
-                    "mode": "live",
-                    "provider": "openai-whisper",
-                    "language": language,
-                }
+                if text:
+                    return {
+                        "text": text,
+                        "mode": "live",
+                        "provider": "openai-whisper",
+                        "language": language,
+                    }
         except Exception as exc:
             return {
                 "text": "",
                 "mode": "demo",
-                "provider": "browser-web-speech-fallback",
+                "provider": "whisper-fallback",
                 "language": language,
-                "note": f"Live STT fallback triggered: {exc}",
+                "note": f"Whisper API error: {exc}. Please type your message.",
             }
 
+    # Demo mode — return a realistic sample sentence
+    sample = (
+        "नमस्ते, मैं आपके AI वॉइस एजेंट की कीमत जानना चाहता हूँ और डेमो बुक करना चाहता हूँ।"
+        if language.startswith("hi")
+        else "Hello, I am interested in your AI voice agent pricing and would like to schedule a demo."
+    )
     return {
-        "text": (
-            "Hello, I am interested in your AI voice agent pricing and would like to schedule a demo."
-            if not language.startswith("hi")
-            else "नमस्ते, मैं आपके AI वॉइस एजेंट की कीमत जानना चाहता हूँ और डेमो बुक करना चाहता हूँ।"
-        ),
+        "text": sample,
         "mode": "demo",
-        "provider": "demo-mock-stt",
+        "provider": "demo-sample",
         "language": language,
-        "note": "Demo Mode active: Browser Web Speech API provides live mic transcription; this endpoint provides sample fallback transcription.",
+        "note": "Demo mode: browser Web Speech API handles live mic. This endpoint returns a sample for MediaRecorder fallback.",
     }
 
 
@@ -79,7 +87,14 @@ async def synthesize_speech(
     language: str = "en",
     voice: Optional[str] = None,
 ) -> Dict[str, Any]:
-    """Synthesize speech via OpenAI TTS in Live mode, or instruct browser SpeechSynthesis in Demo mode."""
+    """
+    Synthesise speech.
+    - Live mode  : calls OpenAI TTS and returns base64 MP3.
+    - Demo mode  : sets use_browser_tts=True so the frontend calls
+                   window.speechSynthesis.speak() with the full text.
+                   We still return a tiny chime WAV so the caller knows
+                   the request succeeded.
+    """
     settings = get_settings()
     selected_voice = voice or settings.openai_tts_voice
 
@@ -105,16 +120,18 @@ async def synthesize_speech(
                     "provider": "openai-tts",
                     "language": language,
                     "use_browser_tts": False,
+                    "text": text,
                 }
         except Exception:
-            pass
+            pass  # fall through to demo mode below
 
+    # Demo mode — tell frontend to use speechSynthesis
     return {
         "audio_base64": _generate_soft_chime_wav_base64(),
         "mime_type": "audio/wav",
         "mode": "demo",
         "provider": "browser-speech-synthesis",
         "language": language,
-        "use_browser_tts": True,
-        "text": text,
+        "use_browser_tts": True,   # ← frontend reads this flag
+        "text": text,              # ← frontend speaks this text
     }

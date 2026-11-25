@@ -69,6 +69,91 @@ SAMPLE_KB_DOCS = [
             "A: Live onboarding demos operate Monday to Saturday, 10:00 AM to 5:30 PM IST (Asia/Kolkata)."
         ),
     },
+    {
+        "title": "C++ Programming Course — Complete Guide",
+        "category": "course",
+        "content": (
+            "Fortivex Academy — C++ Programming Course (Complete Guide)\n\n"
+            "Course Name: Mastering C++ — From Basics to Advanced Systems Programming\n"
+            "Duration: 12 weeks (self-paced) | 60+ hours of content\n"
+            "Level: Beginner to Advanced\n"
+            "Language: English and Hindi\n"
+            "Price: ₹4,999 one-time (or ₹499/month subscription)\n"
+            "Certificate: Yes — industry-recognised Fortivex Academy Certificate on completion\n\n"
+            "What you will learn:\n"
+            "Module 1 — C++ Fundamentals: Variables, data types, operators, control flow (if/else, switch, loops), "
+            "functions, arrays, strings, and pointers. Hands-on exercises after every topic.\n"
+            "Module 2 — Object-Oriented Programming (OOP): Classes and objects, constructors and destructors, "
+            "inheritance, polymorphism, encapsulation, and abstraction. Real-world projects like Bank Account and "
+            "Student Management systems.\n"
+            "Module 3 — Advanced C++: Templates and generics, STL (Standard Template Library) — vectors, maps, "
+            "sets, iterators, algorithms. Exception handling, file I/O, and smart pointers (unique_ptr, shared_ptr).\n"
+            "Module 4 — Systems & Competitive Programming: Memory management, stack vs heap, recursion, dynamic "
+            "programming, graph algorithms (BFS/DFS), sorting algorithms, and time complexity analysis (Big-O).\n"
+            "Module 5 — Real-World Projects: Build a mini-compiler, a simple game using SFML, and a command-line "
+            "inventory management system.\n\n"
+            "Who should enroll:\n"
+            "- Engineering and B.Tech/B.E. students preparing for placements and competitive coding\n"
+            "- Candidates preparing for FAANG/product company interviews\n"
+            "- Developers transitioning from Python or Java to systems programming\n"
+            "- Anyone preparing for GATE CS, competitive programming (Codeforces, LeetCode, HackerRank)\n\n"
+            "Prerequisites: Basic computer knowledge. No prior programming experience required for Module 1.\n\n"
+            "Tools & IDE: VS Code, GCC/G++ compiler, Replit (online), CLion.\n\n"
+            "Instructor: Senior engineers with 10+ years at top tech companies.\n\n"
+            "Batch Schedule: New batches start every Monday. Live doubt-clearing sessions every Saturday 6–8 PM IST.\n\n"
+            "Enroll now at fortivex.ai/courses/cpp or call our AI agent for instant enrollment."
+        ),
+    },
+    {
+        "title": "Java Programming Course — Complete Guide",
+        "category": "course",
+        "content": (
+            "Fortivex Academy — Java Programming Course (Complete Guide)\n\n"
+            "Course Name: Java Mastery — Core Java to Spring Boot & Microservices\n"
+            "Duration: 14 weeks (self-paced) | 70+ hours of content\n"
+            "Level: Beginner to Advanced\n"
+            "Language: English and Hindi\n"
+            "Price: ₹5,499 one-time (or ₹549/month subscription)\n"
+            "Bundle Offer: C++ + Java Bundle at ₹8,499 (save ₹1,999)\n"
+            "Certificate: Yes — Fortivex Academy Java Developer Certificate\n\n"
+            "What you will learn:\n"
+            "Module 1 — Core Java Fundamentals: JDK setup, JVM internals, variables, data types, operators, "
+            "control structures (if/else, loops, switch), methods, arrays, and strings. Write your first Java "
+            "programs with hands-on labs.\n"
+            "Module 2 — Object-Oriented Programming in Java: Classes, objects, constructors, 'this' keyword, "
+            "inheritance, method overriding, abstract classes, interfaces, and polymorphism. Projects: Library "
+            "Management System, E-commerce Cart.\n"
+            "Module 3 — Advanced Core Java: Collections Framework (ArrayList, LinkedList, HashMap, HashSet, "
+            "TreeMap), Generics, Iterator, Comparator, Lambda expressions, Stream API, Optional class, "
+            "and functional programming in Java 8+.\n"
+            "Module 4 — Multithreading & Exception Handling: Thread lifecycle, synchronization, wait/notify, "
+            "ExecutorService, CompletableFuture. Checked and unchecked exceptions, custom exceptions, "
+            "try-with-resources.\n"
+            "Module 5 — Java for Backend Development (Spring Boot): Spring Core (IoC, DI), Spring Boot REST APIs, "
+            "Spring Data JPA + Hibernate, Spring Security (JWT authentication), Maven/Gradle build tools, "
+            "and Docker containerisation of Spring Boot apps.\n"
+            "Module 6 — Microservices & Cloud Deployment: Microservices architecture with Spring Cloud, "
+            "Eureka service discovery, API Gateway, Feign clients, and deploying Java applications on AWS EC2 "
+            "and Heroku.\n"
+            "Module 7 — Interview Preparation: 200+ LeetCode-style problems in Java, System Design basics, "
+            "SOLID principles, Design Patterns (Singleton, Factory, Observer, Builder), and mock interview sessions.\n\n"
+            "Who should enroll:\n"
+            "- Students and freshers targeting Java developer roles at IT companies (TCS, Infosys, Wipro, Cognizant)\n"
+            "- Developers wanting to build enterprise-grade REST APIs with Spring Boot\n"
+            "- Backend engineers adding microservices and cloud skills to their portfolio\n"
+            "- Anyone preparing for Java-based placement drives, campus hiring, or AMCAT/Cocubes exams\n\n"
+            "Prerequisites: Basic computer knowledge. C++ or Python background is helpful but not required.\n\n"
+            "Tools & IDE: IntelliJ IDEA (recommended), Eclipse, VS Code with Java Extension Pack, Maven.\n\n"
+            "Instructor: Java architects with experience at Goldman Sachs, JPMorgan, and Infosys.\n\n"
+            "Batch Schedule: New batches every Monday. Weekend live sessions (Sat + Sun, 10 AM – 12 PM IST). "
+            "Lifetime access to recorded lectures.\n\n"
+            "Special Offers:\n"
+            "- Students with valid college ID: 20% discount (₹4,399)\n"
+            "- Group enrollment (3+ students): Additional 10% off\n"
+            "- EMI option: ₹0 cost EMI on 3 or 6 months via Razorpay\n\n"
+            "Enroll now at fortivex.ai/courses/java or ask our AI agent for a free demo class."
+        ),
+    },
 ]
 
 
